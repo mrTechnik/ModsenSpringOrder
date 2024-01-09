@@ -9,7 +9,7 @@ import app.libraryservice.domain.BookOrder;
 
 @RepositoryRestResource
 public interface BookOrderRepo extends JpaRepository<BookOrder, Integer>{
-    @Query(value = "select b.*from bookorder b where b.bookorderdate + b.bookendorderdate > getdate()",
+    @Query(value = "select b.* from bookorder b Where Extract(day from CURRENT_DATE - b.book_order_date) < b.book_end_order_date",
     nativeQuery = true)
 List<BookOrder> getAllUnorderedBooks();
 }
